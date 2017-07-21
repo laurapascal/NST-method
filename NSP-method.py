@@ -68,8 +68,8 @@ for i in [0,1,2]:
     arguments.append("Gauss[1,0]")
     process = QtCore.QProcess()
     print "Calling ANTS"
-    process.setStandardErrorFile( "log/myANTSlog.log", QtCore.QIODevice.Append)
-    process.setStandardOutputFile( "log/myANTSlogOutputFile.log", QtCore.QIODevice.Append)
+    process.setStandardErrorFile( "logs/myANTSlog.log", QtCore.QIODevice.Append)
+    process.setStandardOutputFile( "logs/myANTSlogOutputFile.log", QtCore.QIODevice.Append)
     process.start(ANTS, arguments)
     process.waitForStarted()
     print "state: " + str(process.state())
@@ -93,8 +93,8 @@ for i in [0,1,2]:
     arguments.append(affine_transform)
     process = QtCore.QProcess()
     print "Calling ITKTransformTools"
-    process.setStandardErrorFile("log/myITKTransformToolslog.log", QtCore.QIODevice.Append)
-    process.setStandardOutputFile("log/myITKTransformToolslogOutputFile.log", QtCore.QIODevice.Append)
+    process.setStandardErrorFile("logs/myITKTransformToolslog.log", QtCore.QIODevice.Append)
+    process.setStandardOutputFile("logs/myITKTransformToolslogOutputFile.log", QtCore.QIODevice.Append)
     process.start(ITKTransformTools, arguments)
     process.waitForStarted()
     print "state: " + str(process.state())
@@ -116,8 +116,8 @@ for i in [0,1,2]:
     arguments.append("--inverty")
     process = QtCore.QProcess()
     print "Calling polydatatransform"
-    process.setStandardErrorFile("log/mypolydatatransformlog.log", QtCore.QIODevice.Append)
-    process.setStandardOutputFile("log/mypolydatatransformlogOutputFile.log", QtCore.QIODevice                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   .Append)
+    process.setStandardErrorFile("logs/mypolydatatransformlog.log", QtCore.QIODevice.Append)
+    process.setStandardOutputFile("logs/mypolydatatransformlogOutputFile.log", QtCore.QIODevice                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   .Append)
     process.start(polydatatransform, arguments)
     process.waitForStarted()
     print "state: " + str(process.state())
