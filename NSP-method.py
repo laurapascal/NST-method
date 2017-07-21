@@ -1,15 +1,18 @@
 import sys, os
 from PyQt4 import QtCore
 
-fixedVolume = ["data/01_seg_manuallyEdited_reg.nrrd", "results/WarpImageMultiTransform/02-warped.nrrd", "results/WarpImageMultiTransform/02-warped2.nrrd"]
-fixedModel = ["data/01.vtk", "results/PolydataTransform/02-warped.vtk", "results/PolydataTransform/02-warped2.vtk"]
-movingVolume = "data/02_seg_manuallyEdited.nrrd"
-movingModel = "data/02.vtk"
-rootname = ["01_to_02" ,"02-warped_to_02", "02-warped2_to_02"]
-SignedMaurerDistanceMapFixedVolume = ["results/SignedMaurerDistanceMapImageFilter/01.nrrd", "results/SignedMaurerDistanceMapImageFilter/02-warped.nrrd", "results/SignedMaurerDistanceMapImageFilter/02-warped.nrrd"]
-SignedMaurerDistanceMapMovingVolume = "results/SignedMaurerDistanceMapImageFilter/02.nrrd"
-warpedVolume = ["results/WarpImageMultiTransform/02-warped-test.nrrd", "results/WarpImageMultiTransform/02-warped2.nrrd", "results/WarpImageMultiTransform/02-warped3.nrrd"]
-warpedModel = ["results/PolydataTransform/02-warped.vtk", "results/PolydataTransform/02-warped2.vtk", "results/PolydataTransform/02-warped3.vtk"]
+
+fixedrootname = "01"
+movingrootname = "02"
+fixedVolume = ["data/" + fixedrootname + ".nrrd", "results/WarpImageMultiTransform/" + movingrootname + "-warped.nrrd", "results/WarpImageMultiTransform/" + movingrootname + "-warped2.nrrd"]
+fixedModel = ["data/" + fixedrootname + ".vtk", "results/PolydataTransform/" + movingrootname + "-warped.vtk", "results/PolydataTransform/" + movingrootname + "-warped2.vtk"]
+movingVolume = "data/" + movingrootname + ".nrrd"
+movingModel = "data/" + movingrootname + ".vtk"
+rootname = [fixedrootname + "_to_" + movingrootname, movingrootname + "-warped_to_" + movingrootname, movingrootname + "-warped2_to_" + movingrootname]
+SignedMaurerDistanceMapFixedVolume = ["results/SignedMaurerDistanceMapImageFilter/" + fixedrootname + ".nrrd", "results/SignedMaurerDistanceMapImageFilter/" + movingrootname + "-warped.nrrd", "results/SignedMaurerDistanceMapImageFilter/" + movingrootname + "-warped.nrrd"]
+SignedMaurerDistanceMapMovingVolume = "results/SignedMaurerDistanceMapImageFilter/" + movingrootname + ".nrrd"
+warpedVolume = ["results/WarpImageMultiTransform/" + movingrootname + "-warped-test.nrrd", "results/WarpImageMultiTransform/" + movingrootname + "-warped2.nrrd", "results/WarpImageMultiTransform/" + movingrootname + "-warped3.nrrd"]
+warpedModel = ["results/PolydataTransform/" + movingrootname + "-warped.vtk", "results/PolydataTransform/" + movingrootname + "-warped2.vtk", "results/PolydataTransform/" + movingrootname + "-warped3.vtk"]
 
 
 for i in [0,1,2]:
