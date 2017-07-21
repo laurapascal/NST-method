@@ -1,6 +1,5 @@
 import sys, os
 from PyQt4 import QtCore
-import itk
 
 fixedVolume = ["data/01_seg_manuallyEdited_reg.nrrd", "results/WarpImageMultiTransform/02-warped.nrrd", "results/WarpImageMultiTransform/02-warped2.nrrd"]
 fixedModel = ["data/01.vtk", "results/PolydataTransform/02-warped.vtk", "results/PolydataTransform/02-warped2.vtk"]
@@ -17,31 +16,37 @@ for i in [0,1,2]:
     print " ------------------------------------------------------------ Iteration: " + str(i)
 
     # SignedMaurerDistanceMapImageFilter
-    print ("SignedMaurerDistanceMapImageFilter")
+    SignedMaurerDistanceMapImageFilter = "/home/laura.pascal/Documents/Non-Spherical-Topology/NST-method/CLI/SignedMaurerDistanceMapImageFilter-build/bin/SignedMaurerDistanceMapImageFilter"
+    arguments = list()
+    arguments.append("--inputfile")
+    arguments.append(fixedVolume[i])
+    arguments.append("--outputfile")
+    arguments.append(SignedMaurerDistanceMapFixedVolume[i])
+    process = QtCore.QProcess()
+    print "Calling SignedMaurerDistanceMapImageFilter"
+    process.setStandardErrorFile( "logs/mySignedMaurerDistanceMapImageFilterlog.log", QtCore.QIODevice.Append)
+    process.setStandardOutputFile( "logs/mySignedMaurerDistanceMapImageFilterlogOutputFile.log", QtCore.QIODevice.Append)
+    process.start(SignedMaurerDistanceMapImageFilter, arguments)
+    process.waitForStarted()
+    print "state: " + str(process.state())
+    process.waitForFinished(-1)
+    print "error: " + str(process.error())
 
-    imageType = itk.Image[itk.UC, 3]
-    FloatImageType = itk.Image[itk.F, 3]
-    reader = itk.ImageFileReader[imageType].New()
-    writer = itk.ImageFileWriter[FloatImageType].New()
-    distanceMapImageFilter = itk.SignedMaurerDistanceMapImageFilter[imageType, FloatImageType].New()
 
-        # fixedVolume
-    reader.SetFileName(fixedVolume[i])
-    reader.Update()
-    distanceMapImageFilter.SetInput(reader.GetOutput())
-    distanceMapImageFilter.Update()
-    writer.SetFileName(SignedMaurerDistanceMapFixedVolume[i])
-    writer.SetInput(distanceMapImageFilter.GetOutput())
-    writer.Update()
-
-        # movinfVolume
-    reader.SetFileName(movingVolume)
-    reader.Update()
-    distanceMapImageFilter.SetInput(reader.GetOutput())
-    distanceMapImageFilter.Update()
-    writer.SetFileName(SignedMaurerDistanceMapMovingVolume)
-    writer.SetInput(distanceMapImageFilter.GetOutput())
-    writer.Update()
+    arguments = list()
+    arguments.append("--inputfile")
+    arguments.append(movingVolume)
+    arguments.append("--outputfile")
+    arguments.append(SignedMaurerDistanceMapMovingVolume)
+    process = QtCore.QProcess()
+    print "Calling SignedMaurerDistanceMapImageFilter"
+    process.setStandardErrorFile( "logs/mySignedMaurerDistanceMapImageFilterlog.log", QtCore.QIODevice.Append)
+    process.setStandardOutputFile( "logs/mySignedMaurerDistanceMapImageFilterlogOutputFile.log", QtCore.QIODevice.Append)
+    process.start(SignedMaurerDistanceMapImageFilter, arguments)
+    process.waitForStarted()
+    print "state: " + str(process.state())
+    process.waitForFinished(-1)
+    print "error: " + str(process.error())
 
     # Registration
     ANTS = "/home/laura/Documents/Non-Spherical-Topology/ANTs-build/bin/ANTS"
